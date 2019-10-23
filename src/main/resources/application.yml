@@ -37,6 +37,10 @@ spring:
       max-file-size: 50MB
       max-request-size: 55MB
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
 logging:
   level:
     org.springframework.http: DEBUG
