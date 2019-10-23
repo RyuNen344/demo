@@ -1,0 +1,9 @@
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+gradle/wrapper/gradle-wrapper.jar
+/HELP.md
+/h2db/

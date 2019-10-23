@@ -7,7 +7,5 @@ import org.springframework.boot.runApplication
 class DemoApplication
 
 fun main(args: Array<String>) {
-
-    println("main method runs")
     runApplication<DemoApplication>(*args)
 }

@@ -1,0 +1,50 @@
+spring:
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+
+  jackson:
+    default-property-inclusion: non_empty
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:./h2db/productdb
+    username: root
+    password: root
+
+    hikari:
+      connection-timeout: 50000
+      idle-timeout: 300000
+
+    initialization-mode: always
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+        web-allow-others: true
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  http:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 55MB
+
+logging:
+  level:
+    org.springframework.http: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.springframework.data: DEBUG
+    org.hibernate: DEBUG
+    com.zaxxer.hikari.Hikari: DEBUG
+    com.ryunen344.miyoshi.demo: DEBUG
+
+debug: true
