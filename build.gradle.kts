@@ -39,16 +39,36 @@ repositories {
 }
 
 dependencies {
+    // spring
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // kotlin extention
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.modelmapper.extensions:modelmapper-spring:2.3.0")
-    implementation("org.springdoc:springdoc-openapi-ui:1.1.49")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // modelmapper
+    val modelmapper_version = "2.3.0"
+    implementation("org.modelmapper.extensions:modelmapper-spring:$modelmapper_version")
+
+    // springdoc-openapi
+    val springdoc_version = "1.1.49"
+    implementation("org.springdoc:springdoc-openapi-ui:$springdoc_version")
+
+    // coroutine
+    val coroutine_version = "1.3.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutine_version")
+
+    // h2 db
     runtimeOnly("com.h2database:h2")
+
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("junit", "junit")
     }
