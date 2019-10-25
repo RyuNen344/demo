@@ -41,8 +41,10 @@ repositories {
 dependencies {
     // spring
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-webflux") {
+        exclude("org.springframework.boot", "spring-boot-starter-reactor-netty")
+    }
+    implementation("org.springframework.boot:spring-boot-starter-tomcat")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     // jackson
@@ -58,12 +60,13 @@ dependencies {
 
     // springdoc-openapi
     val springdoc_version = "1.1.49"
-    implementation("org.springdoc:springdoc-openapi-ui:$springdoc_version")
+//    implementation("org.springdoc:springdoc-openapi-ui:$springdoc_version")
 
     // coroutine
-    val coroutine_version = "1.3.2"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutine_version")
+    val coroutines_version = "1.3.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$coroutines_version")
 
     // h2 db
     runtimeOnly("com.h2database:h2")

@@ -8,15 +8,19 @@ import reactor.core.publisher.Flux
 
 @RestController
 @RequestMapping(path = ["todo"])
-class TodoController(private val service : TodoService) {
+class TodoController(private val service: TodoService) {
 
     @GetMapping("/hello")
-    fun hello() : Flux<String> =
+    fun hello(): Flux<String> =
             Flux.just("Hello", "World")
 
     @GetMapping("/stream")
-    fun stream() : Flux<Sequence<Int>> {
-        val stream : Sequence<Int> = generateSequence(0) { it + 1 }
+    fun stream(): Flux<Sequence<Int>> {
+        val stream: Sequence<Int> = generateSequence(0) { it + 1 }
         return Flux.just(stream)
     }
+
+    @GetMapping("/coroutines")
+    suspend fun hoge(): String =
+            service.suspendStr()
 }
