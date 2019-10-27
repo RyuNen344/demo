@@ -4,6 +4,7 @@ buildscript {
     val springBootVersion by extra { "2.2.0.RELEASE" }
     repositories {
         mavenCentral()
+        maven { url = uri("https://repo.spring.io/milestone") }
         jcenter()
     }
     dependencies {
@@ -35,12 +36,22 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://repo.spring.io/milestone") }
     jcenter()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot.experimental:spring-boot-bom-r2dbc:0.1.0.M2")
+    }
 }
 
 dependencies {
     // spring
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot.experimental:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc") {
+        exclude("org.springframework.data", "spring-data-jdbc")
+    }
     implementation("org.springframework.boot:spring-boot-starter-webflux") {
         exclude("org.springframework.boot", "spring-boot-starter-reactor-netty")
     }
@@ -70,7 +81,7 @@ dependencies {
 
     // h2 db
     runtimeOnly("com.h2database:h2")
-
+    runtimeOnly("io.r2dbc:r2dbc-h2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("junit", "junit")
@@ -78,6 +89,7 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.springframework.boot.experimental:spring-boot-test-autoconfigure-r2dbc")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
