@@ -6,6 +6,8 @@ import com.ryunen344.demo.service.interfaces.TodoService
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
@@ -34,4 +36,7 @@ class TodoServiceImpl(private val log: Logger, private val repository: TodoRepos
         log.debug("start")
         return repository.findAll().log().collectList().block()
     }
+
+    fun findAll(): Flow<TodoEntity> =
+            repository.findAll().log().asFlow()
 }

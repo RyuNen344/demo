@@ -2,6 +2,7 @@ package com.ryunen344.demo.controller
 
 import com.ryunen344.demo.domain.TodoEntity
 import com.ryunen344.demo.service.TodoServiceImpl
+import kotlinx.coroutines.flow.Flow
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -32,4 +33,8 @@ class TodoController(private val service: TodoServiceImpl) {
     @GetMapping("/get")
     suspend fun select(): List<TodoEntity>? =
             service.selectAll()
+
+    @GetMapping("/get/all")
+    fun findAll(): Flow<TodoEntity> =
+            service.findAll()
 }
