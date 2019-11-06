@@ -49,9 +49,6 @@ dependencyManagement {
 dependencies {
     // spring
     implementation("org.springframework.boot.experimental:spring-boot-starter-data-r2dbc")
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc") {
-        exclude("org.springframework.data", "spring-data-jdbc")
-    }
     implementation("org.springframework.boot:spring-boot-starter-webflux") {
         exclude("org.springframework.boot", "spring-boot-starter-reactor-netty")
     }
@@ -69,10 +66,6 @@ dependencies {
     val modelmapper_version = "2.3.0"
     implementation("org.modelmapper.extensions:modelmapper-spring:$modelmapper_version")
 
-    // springdoc-openapi
-    val springdoc_version = "1.1.49"
-//    implementation("org.springdoc:springdoc-openapi-ui:$springdoc_version")
-
     // coroutine
     val coroutines_version = "1.3.2"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
@@ -80,7 +73,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$coroutines_version")
 
     // h2 db
-    runtimeOnly("com.h2database:h2")
+    implementation("com.h2database:h2")
     runtimeOnly("io.r2dbc:r2dbc-h2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {

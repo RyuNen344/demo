@@ -2,25 +2,15 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
+
   mvc:
     throw-exception-if-no-handler-found: true
+
   resources:
     add-mappings: false
 
   jackson:
     default-property-inclusion: non_empty
-
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:./h2db/tododb
-    username: root
-    password: root
-
-    hikari:
-      connection-timeout: 50000
-      idle-timeout: 300000
-
-    initialization-mode: always
 
   h2:
     console:
@@ -30,6 +20,15 @@ spring:
         trace: true
         web-allow-others: true
 
+  r2dbc:
+    initialization-mode: always
+    url: r2dbc:h2:file:///./h2db/tododb?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 500
+      idle-timeout: 3000
+
   output:
     ansi:
       enabled: ALWAYS
@@ -38,10 +37,6 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 55MB
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
 
 logging:
   level:
